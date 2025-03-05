@@ -2,13 +2,20 @@
  * Find the actor_id of every actor whose first name starts with the indicated string.
  * Order the results from low to hi.
  */
-CREATE OR REPLACE FUNCTION get_actor_ids(text) RETURNS TABLE(actor_id INTEGER) AS
-$$
--- FIXME: implementation goes here
-$$
-LANGUAGE SQL
-IMMUTABLE
-RETURNS NULL ON NULL INPUT;
+CREATE OR REPLACE FUNCTION get_actor_ids(search_text TEXT)
+RETURNS TABLE(actor_id INTEGER)
+AS $$
+DECLARE
+pattern TEXT;
+BEGIN
+pattern := '^' || search_text;
+RETURN QUERY
+SELECT actor.actor_id
+FROM actor
+WHERE actor.first_name ~* pattern
+ORDER BY actor.actor_id;
+END;
+$$ LANGUAGE plpgsql;
 
 SELECT * FROM get_actor_ids('a');
 SELECT * FROM get_actor_ids('b');
