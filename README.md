@@ -10,7 +10,7 @@ The following picture illustrates the database's structure:
 <img src=dvd-rental-sample-database-diagram.png width=80% />
 
 ## Tasks
-
+ 
 1. Fork this repo and clone it on the lambda server.
 
     Notice that this repo uses [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
